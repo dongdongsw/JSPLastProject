@@ -106,7 +106,7 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">스토어</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="index.html">전체상품</a>
+                                        <a class="dropdown-item" href="../goods/list.do">전체상품</a>
                                         
                                         <a class="dropdown-item" href="archive.html">신상품</a>
                                         
