@@ -82,7 +82,7 @@
                                  <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">맛집</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="index.html">맛집 목록</a>
+                                        <a class="dropdown-item" href="../food/list.do">맛집 목록</a>
                                         <%-- 지도 이용 --%>
                                         <a class="dropdown-item" href="archive.html">맛집 찾기</a>
                                         
