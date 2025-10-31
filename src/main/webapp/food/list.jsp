@@ -90,14 +90,21 @@
                     <div class="pagination-area d-sm-flex mt-15">
                         <nav aria-label="#">
                             <ul class="pagination">
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-                                </li>
+                            	<c:if test="${startPage > 1 }">
+	                            	<li class="page-item">
+	                                    <a class="page-link" href="../food/list.do?page=${startPage-1}">이전 <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+	                                </li>
+                                </c:if>
+                                <c:forEach var="i" begin="${startPage}" end="${endPage }">
+	                                <li class="page-item ${i==curpage?'active':'' }">
+	                                    <a class="page-link" href="../food/list.do?page=${i }">${i }</a>
+	                                </li>
+                                </c:forEach>
+                                <c:if test="${endPage < totalpage }">
+	                                <li class="page-item">
+	                                    <a class="page-link" href="../food/list.do?page=${endPage+1}">다음 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+	                                </li>
+                                </c:if>
                             </ul>
                         </nav>
                         <div class="page-status">
