@@ -21,23 +21,20 @@
                 </div>
                 <div class="col-7 col-sm-6">
                     <div class="signup-search-area d-flex align-items-center justify-content-end">
-                        <div class="login_register_area d-flex">
+                         <div class="login_register_area d-flex">
                             <div class="login">
-                                <a href="register.html">Sing in</a>
+                                <form action="#" method="get">
+	                                <input type="text" name="id" id="id" placeholder="아이디 입력" class="input-sm">
+	                                <input type="text" name="pwd" id="pwd" placeholder="비밀번호 입력" class="input-sm">
+	                                <input type="submit" value="로그인" class="btn-sm btn-danger">
+	                            </form>
                             </div>
-                            <div class="register">
-                                <a href="register.html">Sing up</a>
+                            <div class="register" style="display:none;">
+                            	<form action="#" method="post">
+                            		${sessionScope.name }(${sessionScope.admin=='y'?'관리자':'일반사용자' })님 로그인되었습니다.
+                            		<input type="submit" value="로그아웃" class="btn-sm btn-danger">
+                            	</form>
                             </div>
-                        </div>
-                        <div class="search_button">
-                            <a class="searchBtn" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
-                        </div>
-                        <div class="search-hidden-form">
-                            <form action="#" method="get">
-                                <input type="search" name="search" id="search-anything" placeholder="Search Anything...">
-                                <input type="submit" value="" class="d-none">
-                                <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -52,7 +49,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="logo_area text-center">
-                        <a href="index.html" class="yummy-logo">Food & Recipe & Goods</a>
+                        <a href="../main/main.do" class="yummy-logo">Food & Recipe & Goods</a>
                     </div>
                 </div>
             </div>
@@ -65,7 +62,7 @@
                         <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
                             <ul class="navbar-nav" id="yummy-nav">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                                    <a class="nav-link" href="../main/main.do">Home <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">회원</a>
@@ -94,9 +91,9 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">레시피</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="index.html">레시피목록</a>
+                                        <a class="dropdown-item" href="../recipe/list.do">레시피목록</a>
                                         <%-- 지도 이용 --%>
-                                        <a class="dropdown-item" href="archive.html">쉐프</a>
+                                        <a class="dropdown-item" href="../recipe/chef_list.do">쉐프</a>
                                         
                                         <a class="dropdown-item" href="single.html">레시피등록</a>
                                         <%-- 네이버 카페 / 블로그 : 형태소 분석 --%>
@@ -106,13 +103,13 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">스토어</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="../goods/list.do">전체상품</a>
+                                        <a class="dropdown-item" href="../goods/list.do?cno=1">전체상품</a>
                                         
-                                        <a class="dropdown-item" href="archive.html">신상품</a>
+                                        <a class="dropdown-item" href="../goods/list.do?cno=2">신상품</a>
                                         
-                                        <a class="dropdown-item" href="single.html">베스트상품</a>
+                                        <a class="dropdown-item" href="../goods/list.do?cno=3">베스트상품</a>
                                         
-                                        <a class="dropdown-item" href="single.html">특가상품</a>
+                                        <a class="dropdown-item" href="../goods/list.do?cno=4">특가상품</a>
                                     </div>
                                 </li>
                                  <li class="nav-item dropdown">
