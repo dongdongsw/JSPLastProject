@@ -51,4 +51,26 @@ public class GoodsDAO {
 		
 		return total;
 	}
+	
+	/*
+		 <update id="goodsHitIncrement" parameterType="hashmap">
+			UPDATE ${goods} SET
+			hit = hi+1
+			WHERE no=#{no}
+		</update>
+		<select id="goodsDetailData" resultType="GoodsVO" parameterType="int">
+			SELECT * FROM ${goods}
+			WHERE no = #{no}
+		</select>
+	 */
+	public static GoodsVO goodsDetailData(Map map) {
+		SqlSession session = ssf.openSession();
+		session.update("goodsHitIncrement",map);
+		
+		session.commit();
+		GoodsVO vo = session.selectOne("goodsDetailData",map);
+		session.close();
+		
+		return vo;
+	}
 }

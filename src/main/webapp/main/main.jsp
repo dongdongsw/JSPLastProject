@@ -33,7 +33,7 @@
     <jsp:include page="${main_jsp }"/>
     
     <!-- 쿠키 출력 -->
-	<jsp:include page="cookies.jsp"/>
+	<%-- <jsp:include page="cookies.jsp"/> --%>
 
     <!-- Footer -->
 	<jsp:include page="footer.jsp"/>

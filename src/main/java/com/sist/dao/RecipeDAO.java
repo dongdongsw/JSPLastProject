@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.sist.commons.CreateSqlSessionFactory;
 import com.sist.vo.ChefVO;
+import com.sist.vo.RecipeVO;
 
 public class RecipeDAO {
 
@@ -42,7 +43,41 @@ public class RecipeDAO {
 		return total;
 	}
 	// 레시피 목록
-	
+	/*
+		 <select id="recipeListData" resultType="com.sist.vo.RecipeVO" parameterType="hashmap">
+			SELECT no,title,chef,poster,hit, likecount, replycount,num
+			FROM (SELECT no,title,chef,poster,hit, likecount, replycount,rownum as num
+			FROM (SELECT no,title,chef,poster,hit, likecount, replycount
+			FROM recipe ORDER BY no ASC))
+			WHERE num BETWEEN #{start} AND #{end}
+		</select>
+		<select id="recipeTotalPage" resultType="int">
+			SELECT CEIL(COUNT(*)/12.0) FROM recipe
+		</select>
+	 */
+	public static List<RecipeVO> recipeListData(Map map){
+		SqlSession session= ssf.openSession();
+		List<RecipeVO> list = session.selectList("recipeListData",map);
+		session.close();
+		return list;
+	}
+	public static int recipeTotalPage() {
+		SqlSession session= ssf.openSession();
+		int total = session.selectOne("recipeTotalPage");
+		session.close();
+		return total;
+	}
+	/*
+	 <select id="recipeCount" resultType="int">
+		SELECT COUNT(*) FROM recipe
+	 </select>
+	 */
+	public static int recipeCount() {
+		SqlSession session= ssf.openSession();
+		int count = session.selectOne("recipeCount");
+		session.close();
+		return count;
+	}
 	// 쉐프 상세보기
 	
 	// 레시피 상세보기

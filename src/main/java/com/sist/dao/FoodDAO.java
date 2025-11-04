@@ -67,5 +67,29 @@ public class FoodDAO {
 		return total;
 	}
 	
-	
+	/*
+		 <!-- 상세보기 -->
+		<sql id="where-fno">
+			WHERE fno=#{fno}
+		</sql>
+		<!-- SQL : 반복된느 SQL 문장을 저장후에 재사용 -->
+		<update id="foodHitIncrement" parameterType="int">
+			UPDATE menupan_food SET
+			hit=hit+1
+			WHERE fno=#{fno}
+			<include refid="where-fno"/>
+		</update>
+		<select id="foodDetailData" resultType="FoodVO" parameterType="int">
+			SELECT * FROM menufan_food
+			<include refid="where-fno"/>
+		</select>
+	 */
+	// 상세보기
+	public static FoodVO foodDetailData(int fno) {
+		SqlSession session = ssf.openSession();
+		session.update("foodHitIncrement",fno);
+		FoodVO vo = session.selectOne("foodDetailData",fno);
+		session.close();
+		return vo;
+	}
 }

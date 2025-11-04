@@ -72,4 +72,33 @@ public class GoodsModel {
 		return "../main/main.jsp";
 		
 	}
+	
+	@RequestMapping("goods/detail_before.do")
+	public String goods_detail_before(HttpServletRequest request, HttpServletResponse response) {
+		
+		String no = request.getParameter("no");
+		String page = request.getParameter("page");
+		String cno = request.getParameter("cno");
+		
+		
+		return "redirect:../goods/detail.do?no=" + no + "&page=" + page + "&cno=" + cno;
+	}
+	@RequestMapping("goods/detail.do")
+	public String goods_detail(HttpServletRequest request, HttpServletResponse response) {
+		
+		String no = request.getParameter("no");
+		String page = request.getParameter("page");
+		String cno = request.getParameter("cno");
+		
+		Map map = new HashMap();
+		map.put("no",no);
+		map.put("goods", table_name[Integer.parseInt(cno)]);
+		GoodsVO vo = GoodsDAO.goodsDetailData(map);
+		
+		request.setAttribute("vo", vo);
+		request.setAttribute("cno", cno);
+		request.setAttribute("page",page);
+		request.setAttribute("main_jsp","../goods/detail.jsp");
+		return "../main/main.jsp";
+	}
 }
