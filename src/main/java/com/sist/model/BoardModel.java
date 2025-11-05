@@ -90,8 +90,10 @@ public class BoardModel {
 		
 		String no = request.getParameter("no");
 		String page = request.getParameter("page");
+		String type = request.getParameter("type");
+		if(type==null) type="0";
 		
-		BoardVO vo = BoardDAO.boardDetailData(Integer.parseInt(no));
+		BoardVO vo = BoardDAO.boardDetailData(Integer.parseInt(no), Integer.parseInt(type));
 		
 		request.setAttribute("vo", vo);
 		request.setAttribute("page", page);

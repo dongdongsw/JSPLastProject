@@ -91,14 +91,16 @@ public class BoardDAO {
 	   </select>
 	 */
 	// 상세보기
-	public static BoardVO boardDetailData(int no) {
+	public static BoardVO boardDetailData(int no, int type) {
 		
 		BoardVO vo = null;
 		
 		try {
 			SqlSession session = ssf.openSession();
-			session.update("boardHitIncrement",no);
-			session.commit();
+			if(type==0) {
+				session.update("boardHitIncrement",no);
+				session.commit();
+			}
 			vo = session.selectOne("boardDetailData",no);
 			session.close();
 		} catch (Exception ex) {

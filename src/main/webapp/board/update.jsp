@@ -74,7 +74,7 @@ $(function(){
 				data:$('#frm').serialize(),
 				success:function(result){
 					if(result==="yes"){
-						location.href="../board/detail.do?no="+no+"&page="+page
+						location.href="../board/detail.do?no="+no+"&page="+page+"&type=1"
 					}else{
 						alert(res)
 					}
