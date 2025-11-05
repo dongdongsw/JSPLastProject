@@ -11,6 +11,8 @@
      <typeAlias type="com.sist.vo.FoodVO" alias="FoodVO"/>
      <typeAlias type="com.sist.vo.GoodsVO" alias="GoodsVO"/>
      <typeAlias type="com.sist.vo.ChefVO" alias="ChefVO"/>
+     <typeAlias type="com.sist.vo.BoardVO" alias="BoardVO"/>
+     <typeAlias type="com.sist.vo.MemberVO" alias="MemberVO"/>
      
   </typeAliases>
   <environments default="develpoment">
@@ -29,5 +31,6 @@
    <mapper resource="com/sist/mapper/main-mapper.xml"></mapper>   
    <mapper resource="com/sist/mapper/goods-mapper.xml"></mapper>
    <mapper resource="com/sist/mapper/recipe-mapper.xml"></mapper>
+    <mapper resource="com/sist/mapper/board-mapper.xml"/>
   </mappers>
 </configuration>

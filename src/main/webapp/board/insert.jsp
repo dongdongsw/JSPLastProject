@@ -9,19 +9,19 @@
 <link rel="stylesheet" href="../css/table.css">
 <style type="text/css">
 .board_row{
-	margin: 0px auto;
-	width: 800px;
+  margin: 0px auto;
+  max-width: 800px;
 }
 </style>
 </head>
 <body>
-	<!-- ****** Breadcumb Area Start ****** -->
+<!-- ****** Breadcumb Area Start ****** -->
     <div class="breadcumb-area" style="background-image: url(../img/bg-img/breadcumb.jpg);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="bradcumb-title text-center">
-                        <h2>자유 게시판</h2>
+                        <h2>글쓰기</h2>
                     </div>
                 </div>
             </div>
@@ -46,44 +46,46 @@
     <section class="archive-area section_padding_80">
         <div class="container">
             <div class="row board_row">
-	            	<table class="table">
-	            		<tr>
-	            			<th class=text-center width="10%">이름</th>
-	            			<td>
-	            				<input type=text name=name class="form-control input-sm" style="width:200px;">
-	            			</td>
-	            		</tr>
-	            		<tr>
-	            			<th class=text-center width="10%">제목</th>
-	            			<td>
-	            				<input type=text name=subject class="form-control input-sm">
-	            			</td>
-	            		</tr>
-	            		<tr>
-	            			<th class=text-center>내용</th>
-	            			<td>
-	            				<textarea rows="10" cols="50" class="form-control"></textarea>
-	            			</td>
-	            		</tr>
-	            		<tr>
-	            			<th class=text-center width="10%">비밀번호</th>
-	            			<td>
-	            				<input type=text name=pwd class="form-control input-sm" style="width:100px;">
-	            			</td>
-	            		</tr>
-	            		<tr>
-	            			<td colspan="2" class="text-center">
-	            				<input type="button" class="btn btn-sm btn-mint" value="글쓰기">
-	            				<input type="button" class="btn btn-sm btn-pink" 
-	            					onclick="javascript:history.back()"value="취소">
-	            				
-	            			</td>
-	            		</tr>
-	            	</table>
-	            </div>
+             <form method="post" action="../board/insert_ok.do">
+              <table class="table">
+               <tr>
+                <th class="text-center">이름</th>
+                <td>
+                 <input type=text name=name class="form-control input-sm" style="width: 200px" required>
+                </td>
+               </tr>
+               <tr>
+                <th class="text-center">제목</th>
+                <td>
+                 <input type=text name=subject class="form-control input-sm" required>
+                </td>
+               </tr>
+               <tr>
+                <th class="text-center">내용</th>
+                <td>
+                 <textarea rows="10" cols="50" 
+                  class="form-control" name=content required
+                 ></textarea>
+                </td>
+               </tr>
+               <tr>
+                <th class="text-center">비밀번호</th>
+                <td>
+                 <input type=password name=pwd class="form-control input-sm" style="width: 150px" required>
+                </td>
+               </tr>
+               <tr>
+                 <td colspan="2" class="text-center">
+                  <input type=submit class="btn btn-sm btn-mint" 
+                    value="글쓰기">
+                  <input type=button class="btn btn-sm btn-pink" 
+                    value="취소" onclick="javascript:history.back()">
+                 </td>
+               </tr>
+              </table>
+              </form>
             </div>
-       
-    </section>   
-         
+        </div>
+    </section>
 </body>
 </html>
