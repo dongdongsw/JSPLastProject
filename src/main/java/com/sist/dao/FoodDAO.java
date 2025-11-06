@@ -92,4 +92,12 @@ public class FoodDAO {
 		session.close();
 		return vo;
 	}
+	
+	// mapper.xml => 실행(x) => sql 문장 저장
+	public static FoodVO foodCookieData(int fno) {
+		SqlSession session = ssf.openSession();
+		FoodVO vo = session.selectOne("foodDetailData",fno);
+		session.close();
+		return vo;
+	}
 }

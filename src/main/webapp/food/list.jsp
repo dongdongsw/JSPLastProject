@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../css/cookie.css">
 </head>
 <body>
 <!-- ****** Breadcumb Area Start ****** -->
@@ -46,7 +47,7 @@
                     <div class="single-post wow fadeInUp" data-wow-delay="0.1s">
                         <!-- Post Thumb -->
                         <div class="post-thumb">
-                          <a href="../food/detail.do?fno=${vo.fno }&page=${curpage}">
+                          <a href="../food/detail_before.do?fno=${vo.fno}&page=${curpage}">
                             <img src="${vo.poster }" alt="">
                           </a>
                         </div>
@@ -79,7 +80,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="../food/detail_before.do?fno=${vo.fno }&page=${curpage }">
+                            <a href="../food/detail_before.do?fno=${vo.fno}&page=${curpage}">
                                 <h4 class="post-headline">${vo.name }</h4>
                             </a>
                         </div>
@@ -92,19 +93,20 @@
                         <nav aria-label="#">
                             <ul class="pagination">
                                <c:if test="${startPage>1 }">
-                                 <li class="page-item">
+                                <li class="page-item">
                                     <a class="page-link" href="../food/list.do?page=${startPage-1 }">이전 <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
-                                 </li>
-                                </c:if>
+                                </li>
+                               </c:if>
+                               
                                 <c:forEach var="i" begin="${startPage }" end="${endPage }">
-                                 <li class="page-item ${i==curpage?'active':'' }"><a class="page-link" href="../food/list.do?page=${i }">${i}</a></li>
-                                </c:forEach>
-                                
-                                <c:if test="${endPage<totalpage }">
-                                 <li class="page-item">
+                                  <li class="page-item ${i==curpage?'active':'' }"><a class="page-link" href="../food/list.do?page=${i }">${i}</a></li>
+                                </c:forEach>   
+                                      
+                               <c:if test="${endPage<totalpage }">                  
+                                <li class="page-item">
                                     <a class="page-link" href="../food/list.do?page=${endPage+1 }">다음 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-                                 </li>
-                                </c:if>
+                                </li>
+                               </c:if>
                             </ul>
                         </nav>
                         <div class="page-status">
@@ -114,6 +116,31 @@
                 </div>
 
             </div>
+            <c:if test="${sessionScope.id!=null}">
+              <div class="row " style="margin-top: 20px;">
+                <div class="recent-container">
+                  <h3>최근 방문 맛집</h3>
+                  <div class="recent-list">
+                    <%-- int i = 0 --%>
+                    <c:set var="i" value="0"/>
+                    <c:forEach var="vo" items="${cList}">
+                      <c:if test="${i<9}">
+                        <a class="recent-card">
+                          <div class="thumb">
+                            <img src="${vo.poster}">
+                          </div>
+                          <div class="meta">
+                            <div class="title">${vo.name}</div>
+                          </div>
+                        </a>
+                      </c:if>
+                      <c:set var="i" value="${i+1}"/>
+                      <%-- i++ --%>
+                    </c:forEach>
+                  </div>
+                </div>
+              </div>
+            </c:if>
         </div>
     </section>
     <!-- ****** Archive Area End ****** -->

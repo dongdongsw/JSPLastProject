@@ -7,8 +7,10 @@ import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
 import com.sist.vo.*;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 
 /*
@@ -72,6 +74,28 @@ public class FoodModel {
 		request.setAttribute("startPage",startPage);
 		request.setAttribute("endPage",endPage);
 		
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");
+		List<FoodVO> cList = new ArrayList<FoodVO>();
+				
+		
+		if(id!=null) { // 로그인된 상태
+			Cookie[] cookies = request.getCookies();
+			if(cookies!=null) {
+				
+				for(int i = cookies.length-1; i>=0; i--) {
+					if(cookies[i].getName().startsWith("food_" + id)){
+						
+						String fno = cookies[i].getValue();
+						FoodVO vo = FoodDAO.foodCookieData(Integer.parseInt(fno));
+						cList.add(vo);
+					}
+				}
+				
+			}
+			request.setAttribute("cList", cList); 
+		}
+		
 		// 보여주는 화면
 		request.setAttribute("main_jsp", "../food/list.jsp");
 		return "../main/main.jsp";
@@ -110,6 +134,30 @@ public class FoodModel {
 		
 		String fno = request.getParameter("fno");
 		String page = request.getParameter("page");
+		// cookie
+		// 1. 로그인 된 상태
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");
+		if(id!=null) {
+			Cookie[] cookies = request.getCookies();
+			if(cookies!=null) {
+				for(int i = 0; i < cookies.length; i++) {
+					if(cookies[i].getName().equals("food_"+id+"_"+fno)) {
+						cookies[i].setMaxAge(0);
+						response.addCookie(cookies[i]);
+						break;
+						
+					}
+				}
+			}
+			
+		}
+		Cookie cookie = new Cookie("food_" + id + "_" + fno,fno);
+		cookie.setMaxAge(60*60*24);
+		response.addCookie(cookie);
+		
+		// 2. 쿠키 저장
+		
 		return "redirect:../food/detail.do?fno="+fno+"&page="+page;
 	}
 }

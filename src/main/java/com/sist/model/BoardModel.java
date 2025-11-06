@@ -8,6 +8,8 @@ import java.util.List;
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.BoardDAO;
+import com.sist.dao.BoardReplyDAO;
+import com.sist.vo.BoardReplyVO;
 import com.sist.vo.BoardVO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -94,6 +96,12 @@ public class BoardModel {
 		if(type==null) type="0";
 		
 		BoardVO vo = BoardDAO.boardDetailData(Integer.parseInt(no), Integer.parseInt(type));
+		
+		List<BoardReplyVO> rList = BoardReplyDAO.replyListData(Integer.parseInt(no));
+		int rcount = BoardReplyDAO.replyCount(Integer.parseInt(no));
+		
+		request.setAttribute("rList",rList);
+		request.setAttribute("rcount",rcount);
 		
 		request.setAttribute("vo", vo);
 		request.setAttribute("page", page);
