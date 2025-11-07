@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class BoardReplyVO {
-	private int no, bno, gropu_id, group_step, group_tab, depth, root;
+	private int no, bno, group_id, group_step, group_tab, depth, root;
 	private String id,name,msg,dbday;
 	private Date regdate;
 }

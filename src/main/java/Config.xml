@@ -14,6 +14,9 @@
      <typeAlias type="com.sist.vo.BoardVO" alias="BoardVO"/>
      <typeAlias type="com.sist.vo.MemberVO" alias="MemberVO"/>
      <typeAlias type="com.sist.vo.BoardReplyVO" alias="BoardReplyVO"/>
+     <typeAlias type="com.sist.vo.EmpVO" alias="EmpVO"/>
+     <typeAlias type="com.sist.vo.DeptVO" alias="DeptVO"/>
+     
      
   </typeAliases>
   <environments default="develpoment">
@@ -34,6 +37,7 @@
    <mapper resource="com/sist/mapper/recipe-mapper.xml"/>
     <mapper resource="com/sist/mapper/board-mapper.xml"/>
     <mapper resource="com/sist/mapper/member-mapper.xml"/>
-    <mapper resource="com/sist/mapper/boardreply-mapper.xml"/>
+    <mapper resource="com/sist/mapper/boardreply-mapper.xml"/>    
+    <mapper resource="com/sist/mapper/emp-mapper.xml"/>
   </mappers>
 </configuration>
