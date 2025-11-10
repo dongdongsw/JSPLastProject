@@ -95,9 +95,39 @@ public class FoodDAO {
 	
 	// mapper.xml => 실행(x) => sql 문장 저장
 	public static FoodVO foodCookieData(int fno) {
+		
 		SqlSession session = ssf.openSession();
 		FoodVO vo = session.selectOne("foodDetailData",fno);
 		session.close();
 		return vo;
+	}
+	
+	public static List<FoodVO> foodFindData(Map map){
+		
+		List<FoodVO> list = null;
+		try {
+			SqlSession session = ssf.openSession();
+			list = session.selectList("foodFindData",map);
+			session.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public static int foodFindCount(Map map){
+		
+		int count = 0;
+		try {
+			SqlSession session = ssf.openSession();
+			count = session.selectOne("foodFindCount",map);
+			
+			session.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return count;
 	}
 }

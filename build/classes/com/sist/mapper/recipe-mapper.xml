@@ -17,14 +17,37 @@
 		SELECT no,title,chef,poster,hit, likecount, replycount,num
 		FROM (SELECT no,title,chef,poster,hit, likecount, replycount,rownum as num
 		FROM (SELECT no,title,chef,poster,hit, likecount, replycount
-		FROM recipe ORDER BY no ASC))
+		FROM recipe WHERE no IN(
+			SELECT no FROM recipe
+			INTERSECT 
+			SELECT no FROM recipeDetail 
+		)
+		 
+		ORDER BY no ASC))
 		WHERE num BETWEEN #{start} AND #{end}
 	</select>
 	<select id="recipeTotalPage" resultType="int">
-		SELECT CEIL(COUNT(*)/12.0) FROM recipe
+		SELECT CEIL(COUNT(*)/12.0) FROM recipe WHERE no IN(
+			SELECT no FROM recipe
+			INTERSECT 
+			SELECT no FROM recipeDetail 
+		)
 	</select>
 	<select id="recipeCount" resultType="int">
-		SELECT COUNT(*) FROM recipe
+		SELECT COUNT(*) FROM recipe WHERE no IN(
+			SELECT no FROM recipe
+			INTERSECT 
+			SELECT no FROM recipeDetail 
+		)
+	</select>
+	<update id="recipeHitIncrement" parameterType="int">
+		UPDATE recipe SET
+		hit = hit + 1
+		WHERE no = #{no}
+	</update>
+	<select id="recipeDetailData" resultType="com.sist.vo.RecipeDetailVO" parameterType="int">
+		SELECT * FROM recipeDetail
+		WHERE no = #{no}
 	</select>
 	
 </mapper>

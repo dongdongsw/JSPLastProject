@@ -153,7 +153,7 @@ $(function(){
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
                                         <a class="dropdown-item" href="../food/list.do">맛집 목록</a>
                                         <%-- 지도 이용 --%>
-                                        <a class="dropdown-item" href="archive.html">맛집 찾기</a>
+                                        <a class="dropdown-item" href="../food/find.do">맛집 찾기</a>
                                         <c:if test="${sessionScope.id!=null && sessionScope.admin=='n' }">
                                          <a class="dropdown-item" href="single.html">맛집 예약</a>
                                         <%-- 네이버 카페 / 블로그 : 형태소 분석 --%>
@@ -211,12 +211,12 @@ $(function(){
                                 </c:if>
                                 <c:if test="${sessionScope.id!=null && sessionScope.admin=='n' }">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="archive.html">마이페이지</a>
+                                    <a class="nav-link" href="../mypage/mypage_main.do">마이페이지</a>
                                 </li>
                                 </c:if>
                                 <c:if test="${sessionScope.id!=null && sessionScope.admin=='y' }">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="archive.html">관리자페이지</a>
+                                    <a class="nav-link" href="../admin/admin_main.do">관리자페이지</a>
                                 </li>
                                 </c:if>
                                 
