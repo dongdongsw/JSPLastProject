@@ -1,53 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.recipe-mapper">
-
-	<!-- 쉐프 목록 출력 -->
-	<select id="chefListData" resultType="ChefVO" parameterType="hashmap">
-		SELECT no, chef as poster, poster as chef, mem_cont1, mem_cont2, mem_cont7, mem_cont3,num
-		FROM (SELECT no, chef, poster, mem_cont1, mem_cont2, mem_cont7, mem_cont3,rownum as num
-			FROM (SELECT no, chef, poster, mem_cont1, mem_cont2, mem_cont7, mem_cont3
-			FROM chef ORDER BY no ASC )) 
-		WHERE num BETWEEN #{start} AND #{end}
-	</select>
-	<select id="chefTotalPage" resultType="int">
-		SELECT CEIL(COUNT(*)/30.0) FROM chef
-	</select>
-	<select id="recipeListData" resultType="com.sist.vo.RecipeVO" parameterType="hashmap">
-		SELECT no,title,chef,poster,hit, likecount, replycount,num
-		FROM (SELECT no,title,chef,poster,hit, likecount, replycount,rownum as num
-		FROM (SELECT no,title,chef,poster,hit, likecount, replycount
-		FROM recipe WHERE no IN(
-			SELECT no FROM recipe
-			INTERSECT 
-			SELECT no FROM recipeDetail 
-		)
-		 
-		ORDER BY no ASC))
-		WHERE num BETWEEN #{start} AND #{end}
-	</select>
-	<select id="recipeTotalPage" resultType="int">
-		SELECT CEIL(COUNT(*)/12.0) FROM recipe WHERE no IN(
-			SELECT no FROM recipe
-			INTERSECT 
-			SELECT no FROM recipeDetail 
-		)
-	</select>
-	<select id="recipeCount" resultType="int">
-		SELECT COUNT(*) FROM recipe WHERE no IN(
-			SELECT no FROM recipe
-			INTERSECT 
-			SELECT no FROM recipeDetail 
-		)
-	</select>
-	<update id="recipeHitIncrement" parameterType="int">
-		UPDATE recipe SET
-		hit = hit + 1
-		WHERE no = #{no}
-	</update>
-	<select id="recipeDetailData" resultType="com.sist.vo.RecipeDetailVO" parameterType="int">
-		SELECT * FROM recipeDetail
-		WHERE no = #{no}
-	</select>
-	
+  <!-- 쉐프 목록 출력  -->
+  <select id="chefListData" resultType="ChefVO"
+   parameterType="hashmap"
+  >
+    SELECT no,chef as poster,poster as chef,mem_cont1,mem_cont2,mem_cont7,
+    mem_cont3,num
+    FROM (SELECT no,chef,poster,mem_cont1,mem_cont2,mem_cont7,
+    mem_cont3,rownum as num
+    FROM (SELECT no,chef,poster,mem_cont1,mem_cont2,mem_cont7,
+    mem_cont3 FROM chef ORDER BY no ASC))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <select id="chefTotalPage" resultType="int">
+    SELECT CEIL(COUNT(*)/30.0) FROM chef
+  </select>
+  <!-- 레시피 목록  -->
+  <select id="recipeListData" resultType="com.sist.vo.RecipeVO"
+    parameterType="hashmap"
+  >
+    SELECT no,title,chef,poster,hit,likecount,replycount,num
+    FROM (SELECT no,title,chef,poster,hit,likecount,replycount,rownum as num
+    FROM (SELECT no,title,chef,poster,hit,likecount,replycount
+    FROM recipe WHERE no IN(
+      SELECT no FROM recipe 
+      INTERSECT 
+      SELECT no FROM recipeDetail
+    )
+    ORDER BY no ASC))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <select id="recipeTotalPage" resultType="int">
+    SELECT CEIL(COUNT(*)/12.0)
+    FROM recipe WHERE no IN(
+      SELECT no FROM recipe 
+      INTERSECT 
+      SELECT no FROM recipeDetail
+    )
+  </select>
+  <select id="recipeCount" resultType="int">
+    SELECT COUNT(*) FROM recipe
+    WHERE no IN(
+      SELECT no FROM recipe 
+      INTERSECT 
+      SELECT no FROM recipeDetail
+    )
+  </select>
+  
+  <update id="recipeHitIncrement" parameterType="int">
+    UPDATE recipe SET
+    hit=hit+1
+    WHERE no=#{no}
+  </update>
+  <select id="recipeDetailData" resultType="com.sist.vo.RecipeDetailVO"
+    parameterType="int"
+  >
+    SELECT * FROM recipedetail
+    WHERE no=#{no}
+  </select>
+  <select id="recipeFindData" resultType="com.sist.vo.RecipeVO"
+    parameterType="hashmap"
+  >
+    SELECT no,title,chef,poster,hit,likecount,replycount,num
+    FROM (SELECT no,title,chef,poster,hit,likecount,replycount,rownum as num
+    FROM (SELECT no,title,chef,poster,hit,likecount,replycount
+    FROM recipe
+    WHERE no IN(
+      SELECT no FROM recipe 
+      INTERSECT 
+      SELECT no FROM recipeDetail
+    )
+    AND ${column} LIKE '%'||#{fd}||'%'
+    ORDER BY no ASC
+    ))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <select id="recipeFindTotalPage" resultType="int">
+    SELECT CEIL(COUNT(*)/12.0)
+    FROM recipe
+    WHERE no IN(
+      SELECT no FROM recipe 
+      INTERSECT 
+      SELECT no FROM recipeDetail
+    )
+    AND ${column} LIKE '%'||#{fd}||'%'
+  </select>
 </mapper>

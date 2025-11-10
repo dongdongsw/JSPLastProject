@@ -39,7 +39,7 @@ public class RecipeModel {
       if(endPage>totalpage)
          endPage=totalpage;
       
-      // 브라우저 전송
+      // 브라우저 전송 
       request.setAttribute("list", list);
       
       request.setAttribute("curpage", curpage);
@@ -70,21 +70,21 @@ public class RecipeModel {
       map.put("end", end);
       
       List<RecipeVO> list=RecipeDAO.recipeListData(map);
-      int totalpage=RecipeDAO.chefTotalPage();
+      int totalpage=RecipeDAO.recipeTotalPage();
       // 블록별 페이지 처리 
       final int BLOCK=10;
       int startPage=((curpage-1)/BLOCK*BLOCK)+1;
       // curpage => 1~10 : 1 , 11~20 : 11
       int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
       
-      int count = RecipeDAO.recipeCount();
-      
       if(endPage>totalpage)
          endPage=totalpage;
       
-      // 브라우저 전송
+      int count=RecipeDAO.recipeCount();
+      // 브라우저 전송 
       request.setAttribute("list", list);
       request.setAttribute("count", count);
+      
       request.setAttribute("curpage", curpage);
       request.setAttribute("totalpage", totalpage);
       request.setAttribute("startPage", startPage);
@@ -98,30 +98,74 @@ public class RecipeModel {
    // 상세보기 
    @RequestMapping("recipe/detail.do")
    public String recipe_detail(HttpServletRequest request,
-	         HttpServletResponse response){
-	   
-	   // 사용자가 보내준 값 받기
-	   String no = request.getParameter("no");
-	   
-	   // 데이터베이스 읽기
-	   RecipeDetailVO vo = RecipeDAO.recipeDetailData(Integer.parseInt(no));
-	   
-	   List<String> mList = new ArrayList<String>();
-	   List<String> iList = new ArrayList<String>();
-	   String[] datas = vo.getFoodmake().split("\n");
-	   for(String s : datas) {
-		   StringTokenizer st = new StringTokenizer(s,"^");
-		   mList.add(st.nextToken());
-		   iList.add(st.nextToken());
-		   
-	   }
-	   request.setAttribute("mList", mList);
-	   request.setAttribute("iList", iList);
-	   request.setAttribute("vo", vo);
-	   
-	   
-	   
-	   request.setAttribute("main_jsp", "../recipe/detail.jsp");
-	      return "../main/main.jsp";
-	   }
+         HttpServletResponse response)
+   {
+      // 사용자가 보내준 값 받기 
+      String no=request.getParameter("no");
+      // 데이터베이스 읽기 
+      RecipeDetailVO vo=
+      RecipeDAO.recipeDetailData(Integer.parseInt(no));
+      
+      List<String> mList=new ArrayList<String>();
+      List<String> iList=new ArrayList<String>();
+      String[] datas=vo.getFoodmake().split("\n");
+      for(String s:datas)
+      {
+         StringTokenizer st=new StringTokenizer(s,"^");
+         mList.add(st.nextToken());
+         iList.add(st.nextToken());
+      }
+      request.setAttribute("mList",mList);
+      request.setAttribute("iList",iList);
+      request.setAttribute("vo", vo);
+      
+      request.setAttribute("main_jsp", "../recipe/detail.jsp");
+      return "../main/main.jsp";
+   }
+   @RequestMapping("recipe/find.do")
+   public String recipe_find(HttpServletRequest request,
+         HttpServletResponse response)
+   {
+      request.setAttribute("main_jsp", "../recipe/find.jsp");
+      return "../main/main.jsp";
+   }
+   @RequestMapping("recipe/recipe_result.do")
+   public String recipe_find_result(HttpServletRequest request,
+         HttpServletResponse response)
+   {
+      String page=request.getParameter("page");
+      if(page==null)
+         page="1";
+      String column=request.getParameter("column");
+      String fd=request.getParameter("fd");
+      int curpage=Integer.parseInt(page);
+      Map map=new HashMap();
+      int rowSize=12;
+      int start=(rowSize*curpage)-(rowSize-1);
+      int end=rowSize*curpage;
+      
+      map.put("start", start);
+      map.put("end", end);
+      map.put("fd",fd);
+      map.put("column", column);
+      List<RecipeVO> list=RecipeDAO.recipeFindData(map);
+      int totalpage=RecipeDAO.recipeFindTotalPage(map);
+      // 블록별 페이지 처리 
+      final int BLOCK=10;
+      int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+      // curpage => 1~10 : 1 , 11~20 : 11
+      int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+      
+      if(endPage>totalpage)
+         endPage=totalpage;
+      
+      int count=RecipeDAO.recipeCount();
+      // 브라우저 전송 
+      request.setAttribute("list", list);
+      request.setAttribute("curpage", curpage);
+      request.setAttribute("totalpage", totalpage);
+      request.setAttribute("startPage", startPage);
+      request.setAttribute("endPage", endPage);
+      return "../recipe/recipe_result.jsp";
+   }
 }

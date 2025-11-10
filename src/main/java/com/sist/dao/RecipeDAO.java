@@ -99,5 +99,41 @@ public class RecipeDAO {
 	}
 	// 레시피 등록
 	
+	/*
+		 <select id="recipeFindData" resultType="com.sist.vo.RecipeVO" parameterType="hashmap">
+			SELECT no,title,chef,poster,hit, likecount, replycount,num
+			FROM (SELECT no,title,chef,poster,hit, likecount, replycount,rownum as num
+			FROM (SELECT no,title,chef,poster,hit, likecount, replycount
+			FROM recipe WHERE no IN(
+				SELECT no FROM recipe
+				INTERSECT 
+				SELECT no FROM recipeDetail 
+			)
+			AND ${column} LIKE '%'||#{fd}||'%'
+			ORDER BY no ASC))
+			WHERE num BETWEEN #{start} AND #{end}
+		</select>
+		<select id="recipeFindTotalPage" resultType="int">
+			SELECT CEIL(COUNT(*)/12.0) FROM recipe WHERE no IN(
+				SELECT no FROM recipe
+				INTERSECT 
+				SELECT no FROM recipeDetail 
+			)
+			AND ${column} LIKE '%'||#{fd}||'%'
+			
+		</select>
+	 */
 	// 레시피 검색
+	public static List<RecipeVO> recipeFindData(Map map){
+		SqlSession session= ssf.openSession();
+		List<RecipeVO> list = session.selectList("recipeFindData",map);
+		session.close();
+		return list;
+	}
+	public static int recipeFindTotalPage(Map map) {
+		SqlSession session= ssf.openSession();
+		int total = session.selectOne("recipeFindTotalPage",map);
+		session.close();
+		return total;
+	}
 }
