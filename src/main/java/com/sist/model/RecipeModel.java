@@ -3,6 +3,7 @@ package com.sist.model;
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
 
+import java.text.DecimalFormat;
 import java.util.*;
 import com.sist.dao.*;
 import com.sist.vo.*;
@@ -82,8 +83,9 @@ public class RecipeModel {
       
       int count=RecipeDAO.recipeCount();
       // 브라우저 전송 
+      DecimalFormat d = new DecimalFormat("##,###,###");
       request.setAttribute("list", list);
-      request.setAttribute("count", count);
+      request.setAttribute("count", d.format(count));
       
       request.setAttribute("curpage", curpage);
       request.setAttribute("totalpage", totalpage);

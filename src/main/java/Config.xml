@@ -16,7 +16,8 @@
      <typeAlias type="com.sist.vo.BoardReplyVO" alias="BoardReplyVO"/>
      <typeAlias type="com.sist.vo.EmpVO" alias="EmpVO"/>
      <typeAlias type="com.sist.vo.DeptVO" alias="DeptVO"/>
-     
+     <typeAlias type="com.sist.vo.LikeVO" alias="LikeVO"/>
+     <typeAlias type="com.sist.vo.JjimVO" alias="JjimVO"/>
      
   </typeAliases>
   <environments default="develpoment">
@@ -39,5 +40,7 @@
     <mapper resource="com/sist/mapper/member-mapper.xml"/>
     <mapper resource="com/sist/mapper/boardreply-mapper.xml"/>    
     <mapper resource="com/sist/mapper/emp-mapper.xml"/>
+    <mapper resource="com/sist/mapper/like-mapper.xml"/>
+    <mapper resource="com/sist/mapper/jjim-mapper.xml"/>
   </mappers>
 </configuration>
