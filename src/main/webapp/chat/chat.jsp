@@ -63,98 +63,99 @@
 <script>
 let websocket;
 window.onload=function(){
-	connection()
+   connection()
 }
 //서버연결 
 function connection()
 {
-	// 소켓연결 
-	websocket=new WebSocket("ws://localhost/JSPLastProject/chat")
-	websocket.onopen=onOpen
-	websocket.onclose=onClose
-	websocket.onmessage=onMessage
+   // 소켓연결 
+   websocket=new WebSocket("ws://localhost:8080/JSPLastProject/chat")
+   //websocket=new WebSocket("ws://192.168.0.36:8080/JSPLastProject/chat")
+   websocket.onopen=onOpen
+   websocket.onclose=onClose
+   websocket.onmessage=onMessage
 }
 //연결처리 => Callback 
 function onOpen(event)
 {
-	 alert("채팅 서버와 연결되었습니다...")
+    alert("채팅 서버와 연결되었습니다...")
 }
 function onClose(event)
 {
-	  alert("채팅 서버와 연결 해제되었습니다...")
+     alert("채팅 서버와 연결 해제되었습니다...")
 }
 function onMessage(event)
 {
-	 let data=event.data // 전송된 데이터 
-	 
-	 if(data.substring(0,3)==="my:") // oto , makeroom  ==> 100 200 300...
-	 // msg:[이름] 메세지
-	 {
-		 appendMyMessage(data.substring(3))
-	 }
-	 if(data.substring(0,4)==="you:") // oto , makeroom  ==> 100 200 300...
-		 // msg:[이름] 메세지
+    let data=event.data // 전송된 데이터 
+    
+    if(data.substring(0,3)==="my:") // oto , makeroom  ==> 100 200 300...
+    // msg:[이름] 메세지
+    {
+       appendMyMessage(data.substring(3))
+    }
+    if(data.substring(0,4)==="you:") // oto , makeroom  ==> 100 200 300...
+       // msg:[이름] 메세지
      {
-		 appendYouMessage(data.substring(4))
-	 }
-	 if(data.substring(0,4)==="msg:") // oto , makeroom  ==> 100 200 300...
-		 // msg:[이름] 메세지
+       appendYouMessage(data.substring(4))
+    }
+    if(data.substring(0,4)==="msg:") // oto , makeroom  ==> 100 200 300...
+       // msg:[이름] 메세지
      {
-		 appendMsgMessage(data.substring(4))
-	 }
+       appendMsgMessage(data.substring(4))
+    }
 }
 function disConnection()
 {
-	websocket.close()
+   websocket.close()
 }
 //퇴장처리 => Callback
 //메세지 전송 => Callback
 function appendMsgMessage(msg)
 {
-	 $('#chatBox').append(msg+"<br>")
-	 $('#chatBox').scrollTop($('#chatBox').scrollHeight)
+    $('#chatBox').append(msg+"<br>")
+    $('#chatBox').scrollTop($('#chatBox').scrollHeight)
 }
 function appendMyMessage(msg)
 {
-	 $('#chatBox').append(msg+"<br>")
-	 $('#chatBox').scrollTop($('#chatBox').scrollHeight)
+    $('#chatBox').append(msg+"<br>")
+    $('#chatBox').scrollTop($('#chatBox').scrollHeight)
 }
 function appendYouMessage(msg)
 {
-	 $('#chatBox').append(msg+"<br>")
-	 $('#chatBox').scrollTop($('#chatBox').scrollHeight)
+    $('#chatBox').append(msg+"<br>")
+    $('#chatBox').scrollTop($('#chatBox').scrollHeight)
 }
 function send()
 {
-	/*let name=$('#name').val()
-	if(name.trim()==="")
-	{
-		$('#name').focus()
-		return
-	}*/
-	
-	let msg=$('#messageInput').val()
-	if(msg.trim()==="")
-	{
-		$('#messageInput').focus()
-		return 
-	}
-	
-	websocket.send(msg)
-	$('#messageInput').val("")
-	$('#messageInput').focus()
+   /*let name=$('#name').val()
+   if(name.trim()==="")
+   {
+      $('#name').focus()
+      return
+   }*/
+   
+   let msg=$('#messageInput').val()
+   if(msg.trim()==="")
+   {
+      $('#messageInput').focus()
+      return 
+   }
+   
+   websocket.send(msg)
+   $('#messageInput').val("")
+   $('#messageInput').focus()
 }
 $(function(){
-	
-	$('#sendBtn').click(function(){
-		send()
-	})
-	$('#messageInput').keydown(function(key){
-		if(key.keyCode===13)//enter @keydown.13 => enter
-		{
-			send()
-		}
-	})
+   
+   $('#sendBtn').click(function(){
+      send()
+   })
+   $('#messageInput').keydown(function(key){
+      if(key.keyCode===13)//enter @keydown.13 => enter
+      {
+         send()
+      }
+   })
 })
   </script>
 </head>

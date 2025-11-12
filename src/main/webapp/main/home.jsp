@@ -27,7 +27,7 @@
                     <div class="single_catagory wow fadeInUp" data-wow-delay=".6s">
                         <img src="../img/catagory-img/2.jpg" alt="">
                         <div class="catagory-title">
-                            <a href="#">
+                            <a href="#newsSection">
                                 <h5>오늘의 뉴스</h5>
                             </a>
                         </div>
@@ -233,7 +233,7 @@
                         </div>
 
                         <!-- Single Widget Area -->
-                        <div class="single-widget-area add-widget text-center">
+                        <div class="single-widget-area add-widget text-center" id="movieSection">
                             <div class="add-widget-area">
                                 <img src="../img/sidebar-img/6.jpg" alt="">
                                 <div class="add-text">
@@ -249,17 +249,8 @@
                         </div>
 
                         <!-- Single Widget Area -->
-                        <div class="single-widget-area newsletter-widget">
-                            <div class="widget-title text-center">
-                                <h6>Newsletter</h6>
-                            </div>
-                            <p>Subscribe our newsletter gor get notification about new updates, information discount, etc.</p>
-                            <div class="newsletter-form">
-                                <form action="#" method="post">
-                                    <input type="email" name="newsletter-email" id="email" placeholder="Your email">
-                                    <button type="submit"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-                                </form>
-                            </div>
+                        <div class="single-widget-area newsletter-widget" id="newsSection">
+                            <%-- <jsp:include page="../news/news.jsp"></jsp:include> --%>
                         </div>
                     </div>
                 </div>
