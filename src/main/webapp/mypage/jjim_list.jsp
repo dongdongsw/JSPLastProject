@@ -35,6 +35,11 @@ $(function() {
             $('#theme').text(json.theme)
             $('#price').text(json.price)
             $('#print').show()
+            
+            setTimeout(()=>{
+				$('.print').hide("slow")
+				
+            }, 10000);
          },
          error:function(err) {
             console.log(err)
@@ -70,7 +75,7 @@ $(function() {
           </tr>
         </c:forEach>
       </table>
-      <table id="print" style="display: none;">
+      <table id="print" class="print" style="display: none;">
        <tr>
          <td width=40% rowspan="8" class="text-center">
             <img src="" id="img" style="width: 340px;height: 350px" class="img-rounded">

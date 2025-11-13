@@ -6,8 +6,8 @@ import lombok.Data;
 
 @Data
 public class ReserveVO {
-	private int no, fno, ok;
-	private String id, reply, time, inwon, dbday;
+	private int no, fno, ok ;
+	private String id, reply, time, inwon, dbday, rday;
 	private Date regdate;
 	private FoodVO fvo = new FoodVO();
 }

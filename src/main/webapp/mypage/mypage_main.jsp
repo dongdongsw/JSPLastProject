@@ -172,17 +172,18 @@
       <p>환영합니다 👋</p>
     </div>
     <ul class="menu">
-      <li><a href="../mypage/mypage_main.do" class="active">회원 정보</a></li>
-      <li><a href="../jjim/jjim_list.do">찜하기</a></li>
-      <li><a href="#">예약 내역</a></li>
+      <li><a href="mypage.jsp" class="active">회원 정보</a></li>
+      <li><a href="../jjim/jjim_list.do">찜 내역</a></li>
+      <li><a href="../mypage/mypage_reserve.do">예약 내역</a></li>
       <li><a href="#">결제 내역</a></li>
-      <li><a href="#">정보 수정</a></li>
+      <li><a href="#">묻고답하기 내역</a></li>
       <li><a href="#">회원 탈퇴</a></li>
     </ul>
   </aside>
 
   <!-- 🔹 메인 정보 영역 -->
   <jsp:include page="${mypage_jsp }"></jsp:include>
+
 </div>
 
 </body>

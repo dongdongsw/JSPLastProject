@@ -13,11 +13,11 @@
       <table>
         <tr>
           <th>이름</th>
-          <td>${sessionScope.name }</td>
+          <td>${sessionScope.name}</td>
         </tr>
         <tr>
           <th>주소</th>
-          <td>${sessionScope.addr1 += " " += sessionScope.addr2 += " " += sessionScope.addr3 }</td>
+          <td>${sessionScope.addr1 += " " += sessionScope.addr2}</td>
         </tr>
         <tr>
           <th>연락처</th>
@@ -31,6 +31,5 @@
     </div>
     <button class="edit-btn" onclick="location.href='editProfile.jsp'">정보 수정 ✏️</button>
   </main>
-
 </body>
 </html>

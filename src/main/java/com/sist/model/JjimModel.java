@@ -51,6 +51,7 @@ public class JjimModel {
 	  request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 	  return "../main/main.jsp";
   }
+  
   @RequestMapping("jjim/jjim_cancel.do")
   public String jjim_cancel(HttpServletRequest request,
 		  HttpServletResponse response)
@@ -60,6 +61,7 @@ public class JjimModel {
 	  JjimDAO.jjimCancel(Integer.parseInt(jno));
 	  return "redirect:../jjim/jjim_list.do";
   }
+  
   @RequestMapping("jjim/food_detail.do")
   public void jjim_food_detail(HttpServletRequest request,
 		  HttpServletResponse response)
@@ -89,4 +91,6 @@ public class JjimModel {
 	}
 	  
   }
+  
+  
 }
