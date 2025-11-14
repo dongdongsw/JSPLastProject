@@ -87,7 +87,7 @@ public class LikeDAO {
 		int count = 0;
 		try {
 			SqlSession session = ssf.openSession();
-			count = session.selectOne("likecount",map);
+			count = session.selectOne("likeCount",map);
 			session.close();
 		} catch (Exception ex) {
 			
